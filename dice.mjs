@@ -5,7 +5,7 @@ var generator = new MersenneTwister();
 
 //exporting dice
 //export {d100, d20, d12, d10, d8, d6, d4, d3};
-export {dice}
+export { dice }
 
 
 //Getting dice functions
@@ -42,10 +42,17 @@ export {dice}
 // }
 
 class dice {
-    constructor(size){
+    constructor(size, quantity) {
         this.size = size;
+        this.quantity = quantity;
     }
-    get result(){
-        return Math.round(generator.random()*(this.size-1)+1)
+    get result() {
+        var x = 1
+        var sum = 0
+        while (x <= this.quantity) {
+            sum += Math.round(generator.random() * (this.size - 1) + 1)
+            x++
+        }
+        return sum;
     }
 }

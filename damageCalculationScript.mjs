@@ -1,7 +1,7 @@
 import {dice} from "./dice.mjs";
 
 //Dice variables
-var d20 = new dice(20);
+const d20 = new dice(20);
 var d12 = new dice(12);
 var d10 = new dice(10);
 var d8 = new dice(8);
@@ -13,7 +13,8 @@ var returnVar = "";
 var advantage = "normal";
 var critical = 19;
 var attackBonus = 9;
-var damageDice = d6
+var damageDice = d6;
+var damageDiceQuantity = 3;
 var damageBonus = 6;
 
 
@@ -23,7 +24,7 @@ var damageBonus = 6;
 for (var ac = 10; ac <= 32; ac++){
     var avgDamage = 0;
     var avgCalculator = 0;
-    var i=0
+    var i=0;
     while (i <= 2000000){
         switch(advantage){
             case "normal":
@@ -40,12 +41,13 @@ for (var ac = 10; ac <= 32; ac++){
             
             case "disavantage":
                 var natScore = Math.min(d20.result, d20.result);
+                break;
         }
         var attackScore = natScore + attackBonus;
         if (attackScore >= ac && natScore != 1){
             avgCalculator += (natScore = critical? damageDice.result + damageDice.result + damageBonus : damageDice.result + damageBonus);
         }
-        i++
+        i++;
     }
     avgDamage = Math.round(avgCalculator/2000000);
     returnVar += `Average damage for ac ${ac}: ${avgDamage} \n`;
